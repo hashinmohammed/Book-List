@@ -1,21 +1,25 @@
-import React,{useState} from 'react'
+import { useState } from 'react';
 
-function BookEdit({book}) {
-  const [title,setTitle]=useState(book.title)
-const handleInputChange=(event)=>{
-  setTitle(event.target.value)
-}
-const handleSubmit=(event)=>{
-  event.preventDefault()
-}
+function BookEdit({ book, onSubmit }) {
+  const [title, setTitle] = useState(book.title);
+
+  const handleChange = (event) => {
+    setTitle(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    onSubmit(book.id, title);
+  };
+
   return (
-   <form onSubmit={handleSubmit} className="book-edit">
-    <label>Title</label>
-    <input onChange={handleInputChange} value={title} type="text" className="input" />
-    <buttton className="button is-primary">Save</buttton>
-
-   </form>
-  )
+    <form onSubmit={handleSubmit} className="book-edit">
+      <label>Title</label>
+      <input className="input" value={title} onChange={handleChange} />
+      <button className="button is-primary">Save</button>
+    </form>
+  );
 }
 
-export default BookEdit
+export default BookEdit;
